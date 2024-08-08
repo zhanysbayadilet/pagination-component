@@ -1,18 +1,23 @@
 import React from 'react';
-import {usePagination} from '../hooks/usePagination';
+import {usePagination} from '../../hooks/usePagination';
 import './Pagination.scss';
+import arrowLeft from '../../assets/icons/arrow-left.svg';
+import arrowRight from '../../assets/icons/arrow-right.svg';
+import arrowsRight from '../../assets/icons/arrows-right.svg';
+import arrowsLeft from '../../assets/icons/arrows-left.svg';
+import Icon from "../Icon/Icon";
 
 interface PaginationProps {
     totalItems: number;
     itemsPerPage: number;
-    siblingCount?: number;
+    stepSize?: number;
     loop?: boolean;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
                                                    totalItems,
                                                    itemsPerPage,
-                                                   siblingCount = 1,
+                                                   stepSize = 3,
                                                    loop = false
                                                }) => {
     const {
@@ -23,7 +28,7 @@ const Pagination: React.FC<PaginationProps> = ({
         goNextMultiple,
         goPreviousMultiple,
         setPage
-    } = usePagination({totalItems, itemsPerPage, siblingCount, loop});
+    } = usePagination({totalItems, itemsPerPage, loop});
 
     const renderPageNumbers = () => {
         const pages = [];
@@ -45,17 +50,17 @@ const Pagination: React.FC<PaginationProps> = ({
     return (
         <div className="pagination">
             <button onClick={goPrevious} disabled={!loop && currentPage === 1}>
-                &laquo; Prev
+                <Icon src={arrowLeft} alt="Previous" />
             </button>
-            <button onClick={() => goPreviousMultiple(5)} disabled={!loop && currentPage <= 5}>
-                &laquo;&laquo; Prev 5
+            <button onClick={() => goPreviousMultiple(stepSize)} disabled={!loop && currentPage <= 5}>
+                <Icon src={arrowsLeft} alt="Previous Multiple" />
             </button>
             <div className="page-numbers">{renderPageNumbers()}</div>
-            <button onClick={() => goNextMultiple(5)} disabled={!loop && currentPage >= totalPages - 5}>
-                Next 5 &raquo;&raquo;
+            <button onClick={() => goNextMultiple(stepSize)} disabled={!loop && currentPage >= totalPages - 5}>
+                <Icon src={arrowsRight} alt="Next Multiple" />
             </button>
             <button onClick={goNext} disabled={!loop && currentPage === totalPages}>
-                Next &raquo;
+                <Icon src={arrowRight} alt="Next" />
             </button>
         </div>
     );

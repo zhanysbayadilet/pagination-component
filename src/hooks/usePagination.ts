@@ -4,14 +4,12 @@ import Pagination from '../utils/PaginationClass';
 interface UsePaginationProps {
     totalItems: number;
     itemsPerPage: number;
-    siblingCount?: number;
     loop?: boolean;
 }
 
 export const usePagination = ({
                                   totalItems,
                                   itemsPerPage,
-                                  siblingCount = 1,
                                   loop = false
                               }: UsePaginationProps) => {
     const [pagination] = useState(new Pagination(totalItems, itemsPerPage, loop));
