@@ -1,25 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Pagination from "./components/Pagination";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+          <h1>Pagination Component</h1>
+          <Pagination totalItems={100} itemsPerPage={10} loop/>
+          <h1>Pagination Component</h1>
+          <Pagination totalItems={100} itemsPerPage={10} siblingCount={3}/>
+      </div>
   );
 }
 
